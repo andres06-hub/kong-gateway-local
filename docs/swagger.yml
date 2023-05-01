@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Example - OpenAPI 3.0
+  description: |-
+    this is an example
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: ex
+    description: Create a new ...
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  /example-path:
+    get:
+      summary: Get one or many ...
+      tags:
+        - ex
+      responses:
+        200:
+          description: (Ok) created...
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/res1'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Insert data about...
+      tags:
+        - ex
+      parameters:
+        - name: id
+          in: query
+          description: User Id
+          schema:
+            type: string
+        - name: token 
+          in: header
+          description: Token Authentication
+          required: true
+          schema:
+            type: string
+        - name: location
+          in: query
+          description: exmaple...
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+      responses:
+        200:
+          description: (Ok) created...
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/res2'
+
+components:
+  responses:
+    NotFound: 
+      description: (NotFound) Information not found
+    BadRequest: 
+      description: (BadRequest) The data sent is incorrect
+    ServerError:
+      description: (ServerError) An error has occurred on the server
+  schemas:
+    body:
+      type: object
+      properties:
+        type:
+          type: integer
+          enum: [1,2,3]
+          description: Type of insurance [Flood, Pets, Auto ...]
+        data1: 
+          type: string
+          description: User location
+        data2:
+          type: integer
+          description: user-submitted fee
+    res1:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: If the request is approved
+        message: 
+          type: string
+          description: Message describing what is returned
+        data:
+          type: object
+          description: Quota data obtained
+    res2:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: If the request is approved
+        message: 
+          type: string
+          description: Message describing what is returned
+        id:
+          type: string
+          description: id of the created quota
