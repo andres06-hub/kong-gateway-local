@@ -1,0 +1,35 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: example-srv
+    host: example-service
+    port: 5051
+    protocol: http
+    routes:
+    - name: axample-route
+      paths:
+      - /example-path
+      strip_path: true
+      methods:
+        - GET
+        - POST
+      # plugins:
+      #   - name: swagger
+      #     enabled: true
+      #     service: cep-shared-service
+      #     config:
+      #       swagger_version: "2.0"
+      #       enabled: true
+      #       path: /docs/swagger.yml
+      #       strip_path: false
+      #       swagger_ui: true
+  - name: example-srv
+    host: example-service
+    port: 5052
+    protocol: http
+    routes:
+      - name: example-route-2
+        paths:
+          - /example-path
+        strip_path: true
