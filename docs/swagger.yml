@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
-  version: 3.0.0
+  version: "2.0"
   title: Example - OpenAPI 3.0
   description: |-
     this is an example
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:5051
 tags:
   - name: ex
     description: Create a new ...
